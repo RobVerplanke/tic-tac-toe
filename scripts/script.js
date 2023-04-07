@@ -1,19 +1,20 @@
 const GameBoard = (() => {
     const board = [['X','O','X'],['O','X','X'],['O','X','O']];
-    return {};
+    return {board};
 })();
 
 const DisplayController = (() => {
     const displayContainer = document.getElementById('game-container');
-    return {};
+    displayContainer.innerHTML = GameBoard.board;
 })();
 
 
 const PlayerHuman = (name, marker) => {
-    name;
-    marker;
+    const playerName = name;
+    const playerMarker = marker;
 };
 
 const PlayerComputer = (marker) => {
-    marker;
+    const computerName = 'Computer';
+    const computerMarker = marker; // opposite of human player's marker
 };
