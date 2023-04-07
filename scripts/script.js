@@ -1,10 +1,13 @@
-const Gameboard = (() => {
-    const board = [[1,2,3],[4,5,6],[7,8,9]];
-    const printBoard = () => {
-        console.log(board);
-    }
-    return {printBoard};
+const GameBoard = (() => {
+    const board = [['X','O','X'],['O','X','X'],['O','X','O']];
+    return {};
 })();
+
+const DisplayController = (() => {
+    const displayContainer = document.getElementById('game-container');
+    return {};
+})();
+
 
 const PlayerHuman = (name, marker) => {
     name;
