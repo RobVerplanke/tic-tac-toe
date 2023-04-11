@@ -1,20 +1,34 @@
-const GameBoard = (() => {
-    const board = [['X','O','X'],['O','X','X'],['O','X','O']];
-    return {board};
-})();
+/* eslint-disable no-plusplus */
+
+const GameBoard = () => {
+    const boardRows = 3;
+    const boardCols = 3;
+    const board = [];
+
+    // Make a 2d grid
+    for(let i = 0; i < boardRows; i ++){
+        board[i] = [];
+        for(let j = 0; j < boardCols; j++){
+            board[i].push('test');
+        }
+    }
+
+    // Allow to display the grid
+    const getBoard = () => board;
+
+    return { getBoard };
+};
 
 const DisplayController = (() => {
-    const displayContainer = document.getElementById('game-container');
-    displayContainer.innerHTML = GameBoard.board;
+
 })();
 
 
-const PlayerHuman = (name, marker) => {
-    const playerName = name;
-    const playerMarker = marker;
-};
+function Player(name, marker) {
 
-const PlayerComputer = (marker) => {
-    const computerName = 'Computer';
-    const computerMarker = marker; // opposite of human player's marker
-};
+}
+
+console.log(GameBoard.boardRows);
+
+// const player1 = Player('Rob', 'X');
+// const player2 = Player('Karel', 'O');
