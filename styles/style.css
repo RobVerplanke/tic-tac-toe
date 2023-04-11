@@ -8,8 +8,8 @@ body{
 
     display: grid;
 
-    grid-template-columns: 1fr 500px 1fr;
-    grid-template-rows: .5fr .5fr 500px 1fr; 
+    grid-template-columns: 1fr 600px 1fr;
+    grid-template-rows: .5fr .5fr 600px 1fr; 
 }
 
 #title-container{
@@ -27,4 +27,11 @@ body{
 
     border: solid 1px;
     color: black;
+}
+
+.single-cell{
+    width: 200px;
+    height: 200px;
+
+    border: solid 1px black;
 }

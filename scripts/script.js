@@ -1,44 +1,46 @@
 /* eslint-disable no-plusplus */
 
+// Create a gameboard object and let it return a display function
 const GameBoard = () => {
     const boardRows = 3;
     const boardCols = 3;
     const board = [];
+    
+    // Create a single cell (empty div width fixed size)
+    const createCell = () => {
+        const cell = document.createElement('div');
+        cell.classList.add('single-cell');
+        // add eventlistener
+    }
 
-    // Make a 2d grid
-    for(let i = 0; i < boardRows; i ++){
+    // Create a 2d grid
+    for(let i = 0; i < boardRows; i++){
         board[i] = [];
         for(let j = 0; j < boardCols; j++){
-            board[i].push('X');
+            board[i].push(createCell()); // push new cell 
         }
     }
 
-    // Display the grid
-    const getBoard = () => board;
+    // Return the board to display
+    const printBoard = () => {
+        const gridContainer = document.getElementById('game-container');
+        gridContainer.append(board);        
+    }
 
-    return { getBoard };
+    return { printBoard };
 };
 
-const DisplayController = () => {
-    const gridContainer = document.getElementById('game-container');
-
-    gridContainer.append(GameBoard.getBoard);
-};
-
-DisplayController();
+const newGame = GameBoard();
+newGame.printBoard();
 
 
+// players (factory function)
 
+// displayController (module)
 
-
-
-
-
-// function Player(name, marker) {
-//     name;
-//     marker;
-// }
-
-
-// const player1 = Player('Rob', 'X');
-// const player2 = Player('Karel', 'O');
+// Game flow
+    // pop-up sign in form
+        // name and marker first player
+        // name second player, auto assign marker
+        // submit
+    // create players
