@@ -6,14 +6,6 @@ const GameBoard = () => {
     const cols = 3;
     const board = [];
     
-    // Create a 2d grid array
-    for(let i = 0; i < rows; i++){
-        board[i] = [];
-        for(let j = 0; j < cols; j++){
-            board[i][j] = `Row ${i}, Col ${j}`;
-        }
-    }
-
     // Create a single cell (empty div width fixed size)
     const createCell = (i, j) => {
         const cell = document.createElement('div');
@@ -23,23 +15,25 @@ const GameBoard = () => {
         return cell;
     }
 
-    // Display the board
-    const printBoard = () => {
+    // Create a 2d grid in a array and in the html container
+    const createGrid = () => {
         const cellContainer = document.getElementById('cell-container');
-        
-        // Create a 2d grid on display
+
         for(let i = 0; i < rows; i++){
+            board[i] = [];
             for(let j = 0; j < cols; j++){
+                board[i][j] = `Row ${i}, Col ${j}`;
                 cellContainer.append(createCell(i, j));
+
             }
         }
     }
 
-    return { printBoard };
+    return { createGrid };
 };
 
 const newGame = GameBoard();
-newGame.printBoard();
+newGame.createGrid();
 
 
 // players (factory function)
