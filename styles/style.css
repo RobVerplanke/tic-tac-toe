@@ -22,7 +22,9 @@ body{
     border: solid 1px;
 }
 
-#game-container{
+#grid-container{
+    width: 600px;
+    height: 600px;
     grid-area: 3 / 2 / 4 / 3;
 
     border: solid 1px;

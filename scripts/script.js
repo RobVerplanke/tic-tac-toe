@@ -11,6 +11,7 @@ const GameBoard = () => {
         const cell = document.createElement('div');
         cell.classList.add('single-cell');
         // add eventlistener
+        return cell;
     }
 
     // Create a 2d grid
@@ -23,8 +24,18 @@ const GameBoard = () => {
 
     // Return the board to display
     const printBoard = () => {
-        const gridContainer = document.getElementById('game-container');
-        gridContainer.append(board);        
+        const gridContainer = document.getElementById('grid-container');
+        const cellContainer = document.createElement('div');
+        cellContainer.classList.add('cell-container');
+        
+        for(let i = 0; i < boardRows; i++){
+            for(let j = 0; j < boardCols; j++){
+                cellContainer.appendChild(board[i][j]);
+            }
+        }
+
+        gridContainer.append(cellContainer);        
+
     }
 
     return { printBoard };
