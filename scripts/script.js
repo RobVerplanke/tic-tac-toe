@@ -2,40 +2,37 @@
 
 // Create a gameboard object and let it return a display function
 const GameBoard = () => {
-    const boardRows = 3;
-    const boardCols = 3;
+    const rows = 3;
+    const cols = 3;
     const board = [];
     
+    // Create a 2d grid array
+    for(let i = 0; i < rows; i++){
+        board[i] = [];
+        for(let j = 0; j < cols; j++){
+            board[i][j] = `Row ${i}, Col ${j}`;
+        }
+    }
+
     // Create a single cell (empty div width fixed size)
-    const createCell = () => {
+    const createCell = (i, j) => {
         const cell = document.createElement('div');
-        cell.classList.add('single-cell');
+        cell.classList.add('cell');
+        cell.textContent = board[i][j];
         // add eventlistener
         return cell;
     }
 
-    // Create a 2d grid
-    for(let i = 0; i < boardRows; i++){
-        board[i] = [];
-        for(let j = 0; j < boardCols; j++){
-            board[i].push(createCell()); // push new cell 
-        }
-    }
-
-    // Return the board to display
+    // Display the board
     const printBoard = () => {
-        const gridContainer = document.getElementById('grid-container');
-        const cellContainer = document.createElement('div');
-        cellContainer.classList.add('cell-container');
+        const cellContainer = document.getElementById('cell-container');
         
-        for(let i = 0; i < boardRows; i++){
-            for(let j = 0; j < boardCols; j++){
-                cellContainer.appendChild(board[i][j]);
+        // Create a 2d grid on display
+        for(let i = 0; i < rows; i++){
+            for(let j = 0; j < cols; j++){
+                cellContainer.append(createCell(i, j));
             }
         }
-
-        gridContainer.append(cellContainer);        
-
     }
 
     return { printBoard };

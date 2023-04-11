@@ -22,16 +22,21 @@ body{
     border: solid 1px;
 }
 
-#grid-container{
+#cell-container{
     width: 600px;
     height: 600px;
     grid-area: 3 / 2 / 4 / 3;
 
     border: solid 1px;
     color: black;
+
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    grid-template-rows: repeat(3, 200px);
 }
 
-.single-cell{
+.cell{
+    display: grid;
     width: 200px;
     height: 200px;
 
