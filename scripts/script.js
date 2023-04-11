@@ -9,26 +9,36 @@ const GameBoard = () => {
     for(let i = 0; i < boardRows; i ++){
         board[i] = [];
         for(let j = 0; j < boardCols; j++){
-            board[i].push('test');
+            board[i].push('X');
         }
     }
 
-    // Allow to display the grid
+    // Display the grid
     const getBoard = () => board;
 
     return { getBoard };
 };
 
-const DisplayController = (() => {
+const DisplayController = () => {
+    const gridContainer = document.getElementById('game-container');
 
-})();
+    gridContainer.append(GameBoard.getBoard);
+};
+
+DisplayController();
 
 
-function Player(name, marker) {
 
-}
 
-console.log(GameBoard.boardRows);
+
+
+
+
+// function Player(name, marker) {
+//     name;
+//     marker;
+// }
+
 
 // const player1 = Player('Rob', 'X');
 // const player2 = Player('Karel', 'O');
