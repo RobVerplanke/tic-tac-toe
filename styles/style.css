@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display&display=swap');
+
 body{
     margin: 0;
     padding: 0;
@@ -23,6 +25,9 @@ body{
 }
 
 #cell-container{
+    font-family: 'Sedgwick Ave Display', cursive;
+    font-size: 10em;
+
     width: 600px;
     height: 600px;
     grid-area: 3 / 2 / 4 / 3;
@@ -37,6 +42,9 @@ body{
 
 .cell{
     display: grid;
+    justify-content: center;
+    align-items: center;
+
     width: 200px;
     height: 200px;
 

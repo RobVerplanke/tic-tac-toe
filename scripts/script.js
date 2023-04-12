@@ -1,40 +1,34 @@
 /* eslint-disable no-plusplus */
 
-// Create a gameboard object and let it return a display function
+// create a gameboard object and let it return a display function
 const GameBoard = () => {
     const rows = 3;
     const cols = 3;
-    const board = [];
+    const board = [['X','O','O'],['X','O','X'],['O','X','X']];
     
-    // Create a single empty cell
-    const createCell = () => {
+    // select a cell
+    function selectCell(e) {
+    const selectedCell = e.target;
+    selectedCell.innerHTML = 'X';
+}
+    // create a single cell with corresponding array value and add a eventlistener to it
+    const createCell = (i, j) => {
         const cell = document.createElement('div');
         cell.classList.add('cell');
-        // add eventlistener
+        cell.innerHTML = board[i][j];
+        cell.addEventListener('click', e => selectCell(e));
         return cell;
     }
 
-    // Create a 2d grid in the 'board' array
-    const createArrayGrid = () => {
-        for(let i = 0; i < rows; i++){
-            board[i] = [];
-            for(let j = 0; j < cols; j++){
-                board[i][j] = createCell();
-            }
-        }
-    }
-
-    // Create a 2d grid on the display
+    // create a 2d grid on the display
     const createDisplayGrid = () => {
         const cellContainer = document.getElementById('cell-container');
         for(let i = 0; i < rows; i++){
             for(let j = 0; j < cols; j++){
-                cellContainer.append(createCell());
+                cellContainer.append(createCell(i, j));
             }
         }
     }
-
-    createArrayGrid();
 
     return { createDisplayGrid };
 };
@@ -47,7 +41,7 @@ newGame.createDisplayGrid();
 
 // displayController (module)
 
-// Game flow
+// game flow
     // pop-up sign in form
         // name and marker first player
         // name second player, auto assign marker
