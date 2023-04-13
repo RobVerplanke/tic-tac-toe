@@ -16,14 +16,15 @@ function GameBoard() {
         }
     };
 
-    // return board coordinates
-    const returnBoardItem = (i, j) => board[i][j];
+    // return array item coordinates
+    const getBoardItem = (i, j) => board[i][j];
     
     // if selected cell is empty add a marker
     const selectCell = (e) => {
         const selectedCell = e.target;
         if(selectedCell.innerHTML === ''){
             selectedCell.innerHTML = 'X';
+            // switch players turn
         } else {
             console.log('not empty');
         }
@@ -33,7 +34,7 @@ function GameBoard() {
     const createCell = (i, j) => {
         const cell = document.createElement('div');
         cell.classList.add('cell');
-        cell.innerHTML = returnBoardItem(i, j);
+        cell.innerHTML = getBoardItem(i, j);
         cell.addEventListener('click', e => selectCell(e));
         return cell;
     };
@@ -57,18 +58,21 @@ const newGame = GameBoard();
 newGame.createGridDisplay();
 
 
-// gameController
-// function gameController() {
-// }
+
+function gameController() {
+   
+}
+
+const Player = (name, marker) => {
+    const playerName = name;
+    const playerMarker = marker;
+    
+    return {}
+};
 
 
-// Player
-// const Player(name, marker) {
-// name,
-// marker
-// }
 
 // sign in form
-// function displayForm(() {
+// function getForm(() {
 // 
 // })()
