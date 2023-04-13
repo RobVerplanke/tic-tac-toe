@@ -1,49 +1,74 @@
 /* eslint-disable no-plusplus */
 
 // create a gameboard object and let it return a display function
-const GameBoard = () => {
+function GameBoard() {
     const rows = 3;
     const cols = 3;
-    const board = [['X','O','O'],['X','O','X'],['O','X','X']];
+    const board = [];
+
+    // create a empty 2d grid
+    const createGridArray = () => {
+        for(let i = 0; i < rows; i++){
+        board[i] = [];
+            for(let j = 0; j < cols; j++){
+                board[i][j] = '';
+            }
+        }
+    };
+
+    // return board coordinates
+    const returnBoardItem = (i, j) => board[i][j];
     
-    // select a cell
-    function selectCell(e) {
-    const selectedCell = e.target;
-    selectedCell.innerHTML = 'X';
-}
+    // if selected cell is empty add a marker
+    const selectCell = (e) => {
+        const selectedCell = e.target;
+        if(selectedCell.innerHTML === ''){
+            selectedCell.innerHTML = 'X';
+        } else {
+            console.log('not empty');
+        }
+    };
+
     // create a single cell with corresponding array value and add a eventlistener to it
     const createCell = (i, j) => {
         const cell = document.createElement('div');
         cell.classList.add('cell');
-        cell.innerHTML = board[i][j];
+        cell.innerHTML = returnBoardItem(i, j);
         cell.addEventListener('click', e => selectCell(e));
         return cell;
-    }
+    };
 
     // create a 2d grid on the display
-    const createDisplayGrid = () => {
+    const createGridDisplay = () => {
         const cellContainer = document.getElementById('cell-container');
         for(let i = 0; i < rows; i++){
             for(let j = 0; j < cols; j++){
                 cellContainer.append(createCell(i, j));
             }
         }
-    }
+    };
+    
+    createGridArray();
 
-    return { createDisplayGrid };
-};
+    return { createGridDisplay };
+}
 
 const newGame = GameBoard();
-newGame.createDisplayGrid();
+newGame.createGridDisplay();
 
 
-// players (factory function)
+// gameController
+// function gameController() {
+// }
 
-// displayController (module)
 
-// game flow
-    // pop-up sign in form
-        // name and marker first player
-        // name second player, auto assign marker
-        // submit
-    // create players
+// Player
+// const Player(name, marker) {
+// name,
+// marker
+// }
+
+// sign in form
+// function displayForm(() {
+// 
+// })()
