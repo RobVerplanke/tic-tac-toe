@@ -1,5 +1,31 @@
 /* eslint-disable no-plusplus */
 
+const gameController = () => {
+
+    const Player = (name, marker) => {
+        const playerName = name;
+        const playerMarker = marker;
+        
+        return { playerMarker }
+    };
+
+    const player1 = Player('Player 1', 'X');
+    const player2 = Player('Player 2', 'O');
+    
+    let activePlayer = player1;
+    
+    const getActivePlayer = () => activePlayer.playerMarker;
+
+    const switchPlayer = () => {
+        activePlayer = activePlayer === player1 ? player2 : player1;
+    };
+
+    return { switchPlayer, getActivePlayer };
+
+ };
+
+const game = gameController();
+
 // create a gameboard object and let it return a display function
 function GameBoard() {
     const rows = 3;
@@ -23,8 +49,8 @@ function GameBoard() {
     const selectCell = (e) => {
         const selectedCell = e.target;
         if(selectedCell.innerHTML === ''){
-            selectedCell.innerHTML = 'X';
-            // switch players turn
+            selectedCell.innerHTML = game.getActivePlayer();
+            game.switchPlayer();
         } else {
             console.log('not empty');
         }
@@ -56,20 +82,6 @@ function GameBoard() {
 
 const newGame = GameBoard();
 newGame.createGridDisplay();
-
-
-
-function gameController() {
-   
-}
-
-const Player = (name, marker) => {
-    const playerName = name;
-    const playerMarker = marker;
-    
-    return {}
-};
-
 
 
 // sign in form
