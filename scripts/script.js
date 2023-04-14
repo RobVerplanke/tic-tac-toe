@@ -50,25 +50,26 @@ function GameBoard() {
      // check if there are 3 markers in a row
     const checkForWin = () => {
         console.log(board);
-        // if( (board[0][0] === board[1][0] && board[0][0] === board[2][0]) ||
-        //     (board[0][1] === board[1][1] && board[0][1] === board[2][1]) ||
-        //     (board[0][2] === board[1][2] && board[0][2] === board[2][2]) ||
-        //     (board[0][0] === board[0][1] && board[0][0] === board[0][2]) ||
-        //     (board[1][0] === board[1][1] && board[1][0] === board[1][2]) ||
-        //     (board[2][0] === board[2][1] && board[2][0] === board[2][2]) ||
-        //     (board[0][0] === board[1][1] && board[0][0] === board[2][2]) ||
-        //     (board[0][2] === board[1][1] && board[0][2] === board[2][0]))
-        // {
-        //     console.log('Winner!');
-        // }
+        if( (board[0][0] === board[1][0] && board[0][0] === board[2][0]) ||
+            (board[0][1] === board[1][1] && board[0][1] === board[2][1]) ||
+            (board[0][2] === board[1][2] && board[0][2] === board[2][2]) ||
+            (board[0][0] === board[0][1] && board[0][0] === board[0][2]) ||
+            (board[1][0] === board[1][1] && board[1][0] === board[1][2]) ||
+            (board[2][0] === board[2][1] && board[2][0] === board[2][2]) ||
+            (board[0][0] === board[1][1] && board[0][0] === board[2][2]) ||
+            (board[0][2] === board[1][1] && board[0][2] === board[2][0]) )
+        {
+            console.log('Winner!');
+        }
     };
     
     // when a player clicks on a grid cell
-    const selectCell = (e) => {
+    const selectCell = (e, i, j) => {
         const selectedCell = e.target;
 
         if(selectedCell.innerHTML === ''){ // if there is no marker in the selected cell
-            selectedCell.innerHTML = gameControl.placeActivePlayerMarker(); // place a marker
+            selectedCell.innerHTML = gameControl.placeActivePlayerMarker(); // place a marker on display
+            board[i][j] = gameControl.placeActivePlayerMarker(); // place a marker in array
             checkForWin(); // check if there are 3 markers in a row
             gameControl.switchPlayer(); // if not, switch active player and continue
         } else {
@@ -83,7 +84,7 @@ function GameBoard() {
         const cell = document.createElement('div');
         cell.classList.add('cell');
         cell.innerHTML = getBoardItem(i, j);
-        cell.addEventListener('click', e => selectCell(e));
+        cell.addEventListener('click', e => selectCell(e, i, j));
         return cell;
     };
 
