@@ -6,7 +6,7 @@ const gameController = () => {
         const playerName = name;
         const playerMarker = marker;
         
-        return { playerMarker }
+        return { playerMarker, playerName }
     };
 
     const player1 = Player('Player 1', 'X');
@@ -15,14 +15,14 @@ const gameController = () => {
     let activePlayer = player1;
     
     const getActivePlayerName = () => activePlayer.playerName;
-    const placeActivePlayerMarker = () => activePlayer.playerMarker;
+    const getActivePlayerMarker = () => activePlayer.playerMarker;
 
 
     const switchPlayer = () => {
         activePlayer = activePlayer === player1 ? player2 : player1;
     };
 
-    return { switchPlayer, placeActivePlayerMarker };
+    return { switchPlayer, getActivePlayerMarker, getActivePlayerName };
 
  };
 
@@ -59,7 +59,7 @@ function GameBoard() {
             (board[0][0] === board[1][1] && board[0][0] === board[2][2] && (!(board[0][0] === ''))) ||
             (board[0][2] === board[1][1] && board[0][2] === board[2][0] && (!(board[0][2] === ''))) )
         {
-            console.log('Winner!');
+            console.log(`${gameControl.getActivePlayerName()} wins!`);
         }
     };
     
@@ -68,8 +68,8 @@ function GameBoard() {
         const selectedCell = e.target;
 
         if(selectedCell.innerHTML === ''){ // if there is no marker in the selected cell
-            selectedCell.innerHTML = gameControl.placeActivePlayerMarker(); // place a marker on display
-            board[i][j] = gameControl.placeActivePlayerMarker(); // place a marker in array
+            selectedCell.innerHTML = gameControl.getActivePlayerMarker(); // place a marker on display
+            board[i][j] = gameControl.getActivePlayerMarker(); // place a marker in array
             checkForWin(); // check if there are 3 markers in a row
             gameControl.switchPlayer(); // if not, switch active player and continue
         } else {
