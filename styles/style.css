@@ -11,26 +11,73 @@ body{
     display: grid;
 
     grid-template-columns: 1fr 600px 1fr;
-    grid-template-rows: .5fr .5fr 600px 1fr; 
+    grid-template-rows: .5fr .5fr .5fr 600px 1fr; 
 }
 
 #title-container{
-    grid-area: 2 / 2 / 3 / 3;
+    grid-area: 2 / 2 / 3 / 3; 
+    font-family: 'Sedgwick Ave Display', cursive;
+    font-size: 3em;
+    color: #333;
 
     display: grid;
-    /* grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr; */
+    justify-content: center;
 
     border: solid 1px;
 }
 
+#display-container{
+    grid-area: 3 / 2 / 4 / 3;
+    
+    
+    border: solid 1px;
+
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+#display{
+    font-family: 'Sedgwick Ave Display', cursive;
+    font-size: 2em;
+    color: green;
+    padding: 10px 10px 10px 30px;
+}
+
+#reset-button{
+    padding: 10px;
+}
+
+#reset-button button{
+    border: 0;
+    width: 100px;
+    height: 30px;
+    border-radius: 8px;
+    background-color: #333;
+    color: white;
+    font-size: 1.2em;
+}
+
+#reset-button button:hover{
+    border: solid 1px;
+    width: 100px;
+    height: 30px;
+    border-radius: 8px;
+    background-color: white;
+    color: #333;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
 #cell-container{
+    grid-area: 4 / 2 / 5 / 3;
     font-family: 'Sedgwick Ave Display', cursive;
     font-size: 10em;
 
     width: 600px;
     height: 600px;
-    grid-area: 3 / 2 / 4 / 3;
 
     border: solid 1px;
     color: black;

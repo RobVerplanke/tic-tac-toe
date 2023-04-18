@@ -1,5 +1,10 @@
 /* eslint-disable no-plusplus */
 
+// ask for player names and markers
+const getPlayers = () => {
+
+}
+
 const gameController = () => {
 
     const Player = (name, marker) => {
@@ -49,7 +54,8 @@ function GameBoard() {
 
      // check if there are 3 markers in a row
     const checkForWin = () => {
-        console.log(board);
+        const displayContainer = document.getElementById('display');
+
         if( (board[0][0] === board[1][0] && board[0][0] === board[2][0] && (!(board[0][0] === ''))) ||
             (board[0][1] === board[1][1] && board[0][1] === board[2][1] && (!(board[0][1] === ''))) ||
             (board[0][2] === board[1][2] && board[0][2] === board[2][2] && (!(board[0][2] === ''))) ||
@@ -59,7 +65,7 @@ function GameBoard() {
             (board[0][0] === board[1][1] && board[0][0] === board[2][2] && (!(board[0][0] === ''))) ||
             (board[0][2] === board[1][1] && board[0][2] === board[2][0] && (!(board[0][2] === ''))) )
         {
-            console.log(`${gameControl.getActivePlayerName()} wins!`);
+            displayContainer.innerText = `${gameControl.getActivePlayerName()} wins!`;
         }
     };
     
@@ -98,7 +104,6 @@ function GameBoard() {
             }
         }
     };
-
       
     createGridArray();
 
@@ -107,9 +112,3 @@ function GameBoard() {
 
 const newGame = GameBoard();
 newGame.createGridDisplay();
-
-
-// sign in form
-// function getForm(() {
-// 
-// })()
