@@ -1,10 +1,5 @@
 /* eslint-disable no-plusplus */
 
-// ask for player names and markers
-const getPlayers = () => {
-
-}
-
 const gameController = () => {
 
     const Player = (name, marker) => {
@@ -104,11 +99,31 @@ function GameBoard() {
             }
         }
     };
+
+    const clearGridDisplay = () => {
+        const cellContainer = document.getElementById('cell-container');
+        cellContainer.innerHTML = '';
+    }
       
     createGridArray();
 
-    return { createGridDisplay };
+    return { createGridDisplay, clearGridDisplay };
 }
+
+// clear current grid and create new grid
+function resetGame() {
+    const newGame = GameBoard();
+    newGame.clearGridDisplay();
+    newGame.createGridDisplay();
+
+}
+
+function addListener() {
+    const resetButton = document.getElementById('reset');
+    resetButton.addEventListener('click', resetGame);
+}
+
+addListener();
 
 const newGame = GameBoard();
 newGame.createGridDisplay();

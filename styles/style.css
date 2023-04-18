@@ -14,6 +14,19 @@ body{
     grid-template-rows: .5fr .5fr .5fr 600px 1fr; 
 }
 
+.form{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 600px;
+    height: 600px;
+    background-color: rgb(122, 122, 122);
+    z-index: 10;
+    
+}
+
 #title-container{
     grid-area: 2 / 2 / 3 / 3; 
     font-family: 'Sedgwick Ave Display', cursive;
