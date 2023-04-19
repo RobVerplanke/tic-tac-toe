@@ -4,6 +4,9 @@
 :root{
     --background-color: #333;
     --text-light-color: #eee;
+    --nav-background-color: white;
+    --container-background-color: #eee;
+    --border-color: #333;
 
     font-family: 'Poppins', sans-serif;
 }
@@ -46,7 +49,7 @@ main{
 
     display: grid;   
     grid-template-columns: 1fr 400px 1fr;
-    grid-template-rows: 1fr 100px 400px 1fr;
+    grid-template-rows: 1fr 70px 400px 1fr;
     border: solid 1px;
 }
 
@@ -58,14 +61,20 @@ nav{
     justify-content: space-between;
     align-items: center;
 
-    padding: 0 20px 0 20px;
+    padding: 0 10px 0 10px;
 
-    border: solid 1px;
+    background-color: var(--nav-background-color);
+}
+
+#game-display{
+    font-size: 1.2em;
+
 }
 
 #grid-container{
     grid-area: 3 / 2 / 4/ 3;
-    border: solid 1px;
+    background-color: var(--container-background-color);
+    border: solid 2px var(--background-color);
 
     font-family: 'Permanent Marker', cursive;
 }
@@ -93,4 +102,5 @@ button:hover{
     font-weight: 900;
     font-size: 1em;
     border: solid 2px var(--background-color);
+    cursor: pointer;
 }
