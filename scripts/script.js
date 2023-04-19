@@ -5,7 +5,8 @@ const GameBoard = (() => {
     const board = ['X','O','O','X','O','X','X','O','X'];
 
     const placeMarker = (index, symbol) => {
-        board[index] = symbol;
+        // const availableCells = board.filter();
+        // availableCells[index] = symbol;
     };
 
     const checkForWin = () => {
@@ -17,12 +18,15 @@ const GameBoard = (() => {
 
 
 const DisplayController = (() => {
+    const displayBoard = document.querySelector('#grid-container');
+    const displayMsg = document.querySelector('#game-display')
+    
     const updateBoard = () => {
         // update display
     }
 
     const showResult = () => {
-        // show result
+        // show who is winner / tie
     }
 
     return { updateBoard, showResult};
@@ -31,7 +35,7 @@ const DisplayController = (() => {
 
 const GameController = {
     currentPlayer: null,
-    
+
     // startGame()
     // switchPlayers
     // handlePlayerMove()

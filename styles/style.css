@@ -7,14 +7,21 @@
     --nav-background-color: white;
     --container-background-color: #eee;
     --border-color: #333;
+    --title-font: 'Permanent Marker', cursive;
+    --text-font: 'Poppins', sans-serif;
 
-    font-family: 'Poppins', sans-serif;
+
 }
 
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+p{
+    font-family: var(--text-font);
+    font-size: 1.2em;
 }
 
 body{
@@ -39,7 +46,7 @@ header{
 }
 
 #title{
-    font-family: 'Permanent Marker', cursive;
+    font-family: var(--title-font);
     color: var(--text-light-color);
     font-size: 2em;
 }
@@ -66,17 +73,12 @@ nav{
     background-color: var(--nav-background-color);
 }
 
-#game-display{
-    font-size: 1.2em;
-
-}
-
 #grid-container{
     grid-area: 3 / 2 / 4/ 3;
     background-color: var(--container-background-color);
     border: solid 2px var(--background-color);
 
-    font-family: 'Permanent Marker', cursive;
+    font-family: var(--title-font);
 }
 
 button{
