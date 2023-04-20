@@ -18,20 +18,28 @@ const GameBoard = (() => {
 
 
 const DisplayController = (() => {
-    const displayBoard = document.querySelector('#grid-container');
-    const displayMsg = document.querySelector('#game-display')
-    
-    const updateBoard = () => {
-        // update display
+
+    // show display on screen - create a button for each array item
+    const printBoard = () => {
+        GameBoard.board.forEach( cell => { 
+            const displayBoard = document.querySelector('#grid-container');
+            const printCell = document.createElement('button');
+            displayBoard.append(printCell);
+            printCell.classList.add('cell');
+            printCell.innerText = cell;
+        });
     }
 
+    // show who is winner / tie
     const showResult = () => {
-        // show who is winner / tie
+        const displayMsg = document.querySelector('#game-display')
+
     }
 
-    return { updateBoard, showResult};
+    return { printBoard, showResult};
 })();
 
+DisplayController.printBoard();
 
 const GameController = {
     currentPlayer: null,
