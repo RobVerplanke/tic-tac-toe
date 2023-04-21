@@ -1,7 +1,6 @@
 /* eslint-disable no-plusplus */
 const Player = (name, symbol) => ({ name, symbol });
 
-
 const GameBoard = (() => {
     const board = ['','','','X','','O','','',''];
 
@@ -9,11 +8,13 @@ const GameBoard = (() => {
     const checkAvailableCell = (index) => {
         if (board[index] !== '') {
             console.log('already taken');
+            return false;
         };
     };
     
     const placeMarker = (e, index, symbol) => {
-        if (checkAvailableCell(index) === true) board[index] = symbol;
+        console.log(checkAvailableCell(index));
+        if (checkAvailableCell(index) !== true) board[index] = symbol;
         DisplayController.updateBoard();
     };
 
