@@ -9,8 +9,6 @@
     --border-color: #333;
     --title-font: 'Permanent Marker', cursive;
     --text-font: 'Poppins', sans-serif;
-
-
 }
 
 *{
@@ -28,7 +26,7 @@ body{
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 120px auto;
-
+    
     height: 100vh;
 }
 
@@ -57,6 +55,7 @@ main{
     display: grid;   
     grid-template-columns: 1fr 540px 1fr;
     grid-template-rows: 1fr 70px 540px 1fr;
+    
     border: solid 1px;
 }
 
@@ -99,7 +98,7 @@ nav{
 
 #button-container button{
     border: 0;
-    width: 90px;
+    width: 120px;
     height: 35px;
     border-radius: 10px;
     color: var(--text-light-color);
@@ -111,7 +110,7 @@ nav{
 
 #button-container button:hover{
     border: 0;
-    width: 90px;
+    width: 120px;
     height: 35px;
     border-radius: 10px;
     color: var(--background-color);
