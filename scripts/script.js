@@ -4,7 +4,6 @@ const GameBoard = (() => {
 
     // checks wether selected cell is empty or not
     const checkAvailableCell = (index) => {
-        
         if (board[index] !== '') {
             console.log('already taken');
             return false;
@@ -13,23 +12,22 @@ const GameBoard = (() => {
     };
 
     const checkForWin = () => {
-        // check for win
+        if( (board[0] === board[1] && board[0] === board[2] && (!(board[0] === ''))) ||
+            (board[3] === board[4] && board[3] === board[5] && (!(board[3] === ''))) ||
+            (board[6] === board[7] && board[6] === board[8] && (!(board[6] === ''))) ||
+            (board[0] === board[3] && board[0] === board[6] && (!(board[0] === ''))) ||
+            (board[1] === board[4] && board[1] === board[7] && (!(board[1] === ''))) ||
+            (board[2] === board[5] && board[2] === board[8] && (!(board[2] === ''))) ||
+            (board[0] === board[4] && board[0] === board[8] && (!(board[0] === ''))) ||
+            (board[2] === board[4] && board[2] === board[6] && (!(board[2] === ''))) )
+        {
+            console.log('winner');
+            // displayContainer.innerText = `${gameControl.getActivePlayerName()} wins!`;
+        }
     };
     
-    // if selected cell is empty, place a marker
-    const placeMarker = (index, marker) => {
-        
-        if (checkAvailableCell(index) === true) {
-            board[index] = marker;
-            // checkForWin();
-            console.log(GameController.currentPlayer);
-            GameController.switchPlayers();
-        };
-        
-        DisplayController.updateDisplay();
-    };
 
-    return { board, checkAvailableCell, placeMarker, checkForWin };
+    return { board, checkAvailableCell, checkForWin };
 })();
 
 
@@ -95,7 +93,7 @@ const GameController = (() => {
      const placeMarker = (index) => {
         if (GameBoard.checkAvailableCell(index) === true) {
             GameBoard.board[index] = getPlayerMarker();
-            // checkForWin();
+            GameBoard.checkForWin();
             switchPlayers();
         };
         
