@@ -21,8 +21,7 @@ const GameBoard = (() => {
             (board[0] === board[4] && board[0] === board[8] && (!(board[0] === ''))) ||
             (board[2] === board[4] && board[2] === board[6] && (!(board[2] === ''))) )
         {
-            console.log('winner');
-            // displayContainer.innerText = `${gameControl.getActivePlayerName()} wins!`;
+            DisplayController.showResult();
         }
     };
     
@@ -64,6 +63,8 @@ const DisplayController = (() => {
     // show who is winner / tie
     const showResult = () => {
         const displayMsg = document.querySelector('#game-display')
+        displayMsg.innerHTML = `<p>${GameController.getPlayerNamer()} WINS!</p>`;
+        displayMsg.classList.add('winning-player');
     };
 
     return { updateDisplay, showResult};
@@ -100,7 +101,7 @@ const GameController = (() => {
         DisplayController.updateDisplay();
     };
 
-    return { currentPlayer, placeMarker, switchPlayers };
+    return { currentPlayer, getPlayerNamer, placeMarker, switchPlayers };
 })();
 
 DisplayController.updateDisplay();

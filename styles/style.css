@@ -20,6 +20,11 @@
 p{
     font-family: var(--text-font);
     font-size: 1.2em;
+    font-weight: 900;
+}
+
+.winning-player{
+    color: green;
 }
 
 body{
@@ -70,6 +75,11 @@ nav{
     padding: 0 10px 0 10px;
 
     background-color: var(--nav-background-color);
+}
+
+#game-display{
+
+
 }
 
 #grid-container{
