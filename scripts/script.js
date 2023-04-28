@@ -13,22 +13,24 @@ const GameBoard = (() => {
     };
 
     const checkForWin = () => {
-        if( (board[0] === board[1] && board[0] === board[2] && (!(board[0] === ''))) ||
+        if ((board[0] === board[1] && board[0] === board[2] && (!(board[0] === ''))) ||
             (board[3] === board[4] && board[3] === board[5] && (!(board[3] === ''))) ||
             (board[6] === board[7] && board[6] === board[8] && (!(board[6] === ''))) ||
             (board[0] === board[3] && board[0] === board[6] && (!(board[0] === ''))) ||
             (board[1] === board[4] && board[1] === board[7] && (!(board[1] === ''))) ||
             (board[2] === board[5] && board[2] === board[8] && (!(board[2] === ''))) ||
             (board[0] === board[4] && board[0] === board[8] && (!(board[0] === ''))) ||
-            (board[2] === board[4] && board[2] === board[6] && (!(board[2] === ''))) )
-        {  
-            console.log(`${GameController.getPlayerName()} is the winner!`);
-            return;
+            (board[2] === board[4] && board[2] === board[6] && (!(board[2] === '')))) {
+                return true;
+                // Game over
         }
 
-        if(!(board.includes(''))){
-            console.log('It\'s a tie!');
-        }        
+        // check for tie
+        if (!(board.includes(''))) {
+            return true;
+            // Game over
+        }
+        return false;
     };    
 
     return { board, checkAvailableCell, checkForWin };
@@ -49,12 +51,22 @@ const GameController = (() => {
 
     const newGame = () =>{
         DisplayController.updateGrid();
-        DisplayController.updateTurn();
+        DisplayController.updateMsgTurn();
     };
+
+    const gameOver = () => {
+        // "freeze" the game so players can't place markers anymore
+        // announce winner or tie
+    }
+
+    const continueGame = () => {
+        switchPlayers();
+        DisplayController.updateGrid();
+        DisplayController.updateMsgTurn();
+    }
 
     const switchPlayers = () => {
         currentPlayer = currentPlayer === player1 ? player2 : player1;
-        // DisplayController.updateMessage();
     };
     
     const getPlayerName = () => currentPlayer.name;
@@ -64,15 +76,17 @@ const GameController = (() => {
     // if selected cell is empty, place a marker
     const placeMarker = (index) => {
         if (GameBoard.checkAvailableCell(index) === true) {
-            GameBoard.board[index] = getPlayerMarker();
-            GameBoard.checkForWin();
-            switchPlayers();
-            DisplayController.updateGrid();
-            DisplayController.updateTurn();
+            // if there is no winner or no a tie, continue the game
+            if(GameBoard.checkForWin() === false){
+                GameBoard.board[index] = getPlayerMarker();
+                continueGame();
+            } else{
+                
+            }
         };
     };
 
-    return { currentPlayer, newGame, getPlayerName, placeMarker, switchPlayers };
+    return { newGame, gameOver, getPlayerName, placeMarker, switchPlayers };
 })();
 
 
@@ -99,10 +113,16 @@ const DisplayController = (() => {
         setCell(displayCell, 'cell', boardItem, index);
     };
 
-    // Show who's turn it is
-    const updateTurn = () => {
+    // show who's turn it is
+    const updateMsgTurn = () => {
         displayMessage.innerHTML = `<p>${GameController.getPlayerName()}'s turn</p>`;
     };
+
+    // show who is the winner or else that the game ended in a tie
+    const displayResult = () => {
+        displayMessage.innerHTML = `<p>${GameController.getPlayerName()} is the winner!</p>`;
+        console.log(`${GameController.getPlayerName()} is the winner!`);
+    }
 
     // clear current board and create new cell for each array item
     const updateGrid = () => {
@@ -114,7 +134,7 @@ const DisplayController = (() => {
         });
     };
     
-    return { updateTurn, updateGrid};
+    return { updateMsgTurn, displayResult, updateGrid};
 })();
 
 GameController.newGame();
