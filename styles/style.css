@@ -9,6 +9,8 @@
     --border-color: #333;
     --title-font: 'Permanent Marker', cursive;
     --text-font: 'Poppins', sans-serif;
+    --cell-color: white;
+    --cell-color-hover: #eee; 
 }
 
 *{
@@ -61,10 +63,8 @@ main{
     grid-area: 2 / 1 / 3 / 1;
 
     display: grid;   
-    grid-template-columns: 1fr 540px 1fr;
-    grid-template-rows: 1fr 70px 540px 1fr;
-    
-    border: solid 1px;
+    grid-template-columns: 1fr 544px 1fr;
+    grid-template-rows: 1fr 70px 544px 1fr;
 }
 
 nav{
@@ -88,26 +88,27 @@ nav{
 #grid-container{
     position: relative;
     grid-area: 3 / 2 / 4/ 3;
-    background-color: var(--container-background-color);
     border: solid 2px var(--background-color);
 }
 
 .cell{
+    vertical-align: middle;
     font-family: var(--title-font);
     font-size: 8em;
+    border: solid 1px;
+    background-color: var(--cell-color);
     
-    width: 175px;
-    height: 175px;
-    border: solid 1px black;
+    width: 180px;
+    height: 180px;
 }
 
 .cell:hover{
     font-family: var(--title-font);
     font-size: 8em;
+    background-color: var(--cell-color-hover);
 
-    width: 175px;
-    height: 175px;
-    border: solid 1px rgb(146, 146, 146);
+    width: 180px;
+    height: 180px;
 }
 
 #button-container button{
