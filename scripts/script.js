@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable prefer-const */
 /* eslint-disable no-plusplus */
 const GameBoard = (() => {
@@ -21,16 +22,16 @@ const GameBoard = (() => {
             (board[2] === board[5] && board[2] === board[8] && (!(board[2] === ''))) ||
             (board[0] === board[4] && board[0] === board[8] && (!(board[0] === ''))) ||
             (board[2] === board[4] && board[2] === board[6] && (!(board[2] === '')))) {
+                DisplayController.announceWinner();
                 return true;
-                // Game over
-        }
-
-        // check for tie
-        if (!(board.includes(''))) {
+        } if(!(board.includes(''))) {
+            DisplayController.announceTie();
             return true;
-            // Game over
-        }
-        return false;
+        } 
+            DisplayController.showCurrentPlayer();
+            GameController.switchPlayers();
+            return false;
+        
     };    
 
     return { board, checkAvailableCell, checkForWin };
@@ -50,20 +51,9 @@ const GameController = (() => {
     let currentPlayer = player1;
 
     const newGame = () =>{
+        DisplayController.showCurrentPlayer();
         DisplayController.updateGrid();
-        DisplayController.updateMsgTurn();
     };
-
-    const gameOver = () => {
-        // "freeze" the game so players can't place markers anymore
-        // announce winner or tie
-    }
-
-    const continueGame = () => {
-        switchPlayers();
-        DisplayController.updateGrid();
-        DisplayController.updateMsgTurn();
-    }
 
     const switchPlayers = () => {
         currentPlayer = currentPlayer === player1 ? player2 : player1;
@@ -75,18 +65,14 @@ const GameController = (() => {
 
     // if selected cell is empty, place a marker
     const placeMarker = (index) => {
-        if (GameBoard.checkAvailableCell(index) === true) {
-            // if there is no winner or no a tie, continue the game
-            if(GameBoard.checkForWin() === false){
-                GameBoard.board[index] = getPlayerMarker();
-                continueGame();
-            } else{
-                
-            }
-        };
+        GameBoard.board[index] = getPlayerMarker();
+        DisplayController.updateGrid();
+        GameBoard.checkForWin();
+        console.log(GameBoard.checkForWin());
+        switchPlayers();
     };
 
-    return { newGame, gameOver, getPlayerName, placeMarker, switchPlayers };
+    return { newGame, getPlayerName, placeMarker, switchPlayers };
 })();
 
 
@@ -106,23 +92,24 @@ const DisplayController = (() => {
         newCell.addEventListener('click', () => GameController.placeMarker(index));
     };
 
+    const showCurrentPlayer = () => {
+        displayMessage.innerHTML = `<p>${GameController.getPlayerName()}'s turn`;
+    };
+
+    const announceWinner = () => {
+        displayMessage.innerHTML = `<p>${GameController.getPlayerName()} wins!</p>`
+    }
+
+    const announceTie = () => {
+        displayMessage.innerHTML = '<p>It\'s a tie!</p>'
+    }
+
     // create a cell (button) on the display
     const createCell = (boardItem, index) => {
         const displayCell = document.createElement('button');  
         displayBoard.append(displayCell);
         setCell(displayCell, 'cell', boardItem, index);
     };
-
-    // show who's turn it is
-    const updateMsgTurn = () => {
-        displayMessage.innerHTML = `<p>${GameController.getPlayerName()}'s turn</p>`;
-    };
-
-    // show who is the winner or else that the game ended in a tie
-    const displayResult = () => {
-        displayMessage.innerHTML = `<p>${GameController.getPlayerName()} is the winner!</p>`;
-        console.log(`${GameController.getPlayerName()} is the winner!`);
-    }
 
     // clear current board and create new cell for each array item
     const updateGrid = () => {
@@ -134,7 +121,7 @@ const DisplayController = (() => {
         });
     };
     
-    return { updateMsgTurn, displayResult, updateGrid};
+    return { updateGrid, announceWinner, announceTie, showCurrentPlayer };
 })();
 
 GameController.newGame();
