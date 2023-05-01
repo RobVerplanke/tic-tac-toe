@@ -23,15 +23,13 @@ const GameBoard = (() => {
             (board[0] === board[4] && board[0] === board[8] && (!(board[0] === ''))) ||
             (board[2] === board[4] && board[2] === board[6] && (!(board[2] === '')))) {
                 DisplayController.announceWinner();
-                return true;
+                return;
         } if(!(board.includes(''))) {
             DisplayController.announceTie();
-            return true;
+            return;
         } 
-            DisplayController.showCurrentPlayer();
-            GameController.switchPlayers();
-            return false;
-        
+        GameController.switchPlayers();
+        DisplayController.showCurrentPlayer();
     };    
 
     return { board, checkAvailableCell, checkForWin };
@@ -66,10 +64,8 @@ const GameController = (() => {
     // if selected cell is empty, place a marker
     const placeMarker = (index) => {
         GameBoard.board[index] = getPlayerMarker();
-        DisplayController.updateGrid();
         GameBoard.checkForWin();
-        console.log(GameBoard.checkForWin());
-        switchPlayers();
+        DisplayController.updateGrid();
     };
 
     return { newGame, getPlayerName, placeMarker, switchPlayers };
