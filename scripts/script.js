@@ -6,6 +6,7 @@ const GameBoard = (() => {
 
     // checks wether selected cell is empty or not
     const checkAvailableCell = (index) => {
+        board = JSON.parse(JSON.stringify(board));
         if (board[index] !== '') {
             return false;
         } 
@@ -55,10 +56,12 @@ const GameController = (() => {
         DisplayController.updateGrid('new');
     };
 
-        const resetGame = () =>{
-            // reset the game
+    const resetGame = () =>{
+        GameBoard.board = ['','','','','','','','',''];
+        DisplayController.updateGrid('new');
+        currentPlayer = player1;
+        DisplayController.showCurrentPlayer();
     };
-
 
     const switchPlayers = () => {
         currentPlayer = currentPlayer === player1 ? player2 : player1;
