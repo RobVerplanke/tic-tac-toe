@@ -114,7 +114,6 @@ const DisplayController = (() => {
     resetButton.addEventListener('click', GameController.resetGame);
     newGameButton.addEventListener('click', GameController.newGame);
 
-    
     const showCurrentPlayer = () => {
         displayMessage.innerHTML = `<p>${GameController.getPlayerName()}'s turn`;
     };
