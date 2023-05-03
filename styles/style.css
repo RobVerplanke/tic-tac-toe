@@ -4,10 +4,10 @@
 :root{
     --background-color: #333;
     --text-light-color: #eee;
-    --nav-background-color: white;
     --container-background-color: #eee;
     --border-color: #333;
     --title-font: 'Permanent Marker', cursive;
+    --cell-font: 'Permanent Marker', cursive;
     --text-font: 'Poppins', sans-serif;
     --cell-color: white;
     --cell-color-hover: #eee; 
@@ -25,24 +25,15 @@ p{
     font-weight: 900;
 }
 
-.message-highlight{
-    color: var( --text-light-color);
-    background-color: green;
-    padding: 10px;
-    border-radius: 10px;
-}
-
 body{
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 120px auto;
-    
     height: 100vh;
 }
 
 header{
     grid-area: 1 / 1 / 1 / 2;
-
     display: grid;
     justify-content: center;
     align-items: center;
@@ -76,24 +67,16 @@ nav{
     align-items: center;
 
     padding: 0 10px 0 10px;
-
-    background-color: var(--nav-background-color);
-}
-
-#game-display{
-
-
 }
 
 #grid-container{
     position: relative;
     grid-area: 3 / 2 / 4/ 3;
-    border: solid 2px var(--background-color);
 }
 
 .cell{
     vertical-align: middle;
-    font-family: var(--title-font);
+    font-family: var(--cell-font);
     font-size: 8em;
     border: solid 1px;
     background-color: var(--cell-color);
@@ -103,7 +86,7 @@ nav{
 }
 
 .cell:hover{
-    font-family: var(--title-font);
+    font-family: var(--cell-font);
     font-size: 8em;
     background-color: var(--cell-color-hover);
 
@@ -133,18 +116,5 @@ nav{
     font-family: 'Poppins', sans-serif;
     font-weight: 900;
     font-size: 1em;
-    border: solid 2px var(--background-color);
     cursor: pointer;
-}
-
-.overlay{
-    position: absolute;
-    z-index: 10;
-    top: 0;
-    left:0;
-
-    width: 500px;
-    height: 500px;
-    background-color: red;
-
 }

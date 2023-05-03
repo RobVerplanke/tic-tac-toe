@@ -4,9 +4,12 @@
 const GameBoard = (() => {
     let board = ['','','','','','','','',''];
 
-    // checks wether selected cell is empty or not
+    const resetBoard = () =>{
+        board = ['','','','','','','','',''];
+    }
+
+    // checks whether selected cell is empty or not
     const checkAvailableCell = (index) => {
-        board = JSON.parse(JSON.stringify(board));
         if (board[index] !== '') {
             return false;
         } 
@@ -25,16 +28,21 @@ const GameBoard = (() => {
                 DisplayController.updateGrid();
                 DisplayController.announceWinner();
                 return true;
+
+        // check if the game ended in a draw
         } if(!(board.includes(''))) {
-            DisplayController.announceTie();
+            DisplayController.updateGrid();
+            DisplayController.announceDraw();
             return true;
         } 
+        
+        // continue the game if there is no winner and no draw
         GameController.switchPlayers();
         DisplayController.showCurrentPlayer();
         return false;
     };    
 
-    return { board, checkAvailableCell, checkForWin };
+    return { board, resetBoard, checkAvailableCell, checkForWin };
 })();
 
 
@@ -53,14 +61,15 @@ const GameController = (() => {
     const newGame = () =>{
         currentPlayer = player1;
         DisplayController.showCurrentPlayer();
-        DisplayController.updateGrid('new');
+        DisplayController.updateGrid();
     };
 
     const resetGame = () =>{
-        GameBoard.board = ['','','','','','','','',''];
-        DisplayController.updateGrid('new');
         currentPlayer = player1;
         DisplayController.showCurrentPlayer();
+        GameBoard.resetBoard();
+        GameBoard.board = ['','','','','','','','',''];
+        DisplayController.updateGrid();
     };
 
     const switchPlayers = () => {
@@ -76,7 +85,7 @@ const GameController = (() => {
         if(GameBoard.checkAvailableCell(index) === true){
             GameBoard.board[index] = getPlayerMarker();
             if(GameBoard.checkForWin() === false){
-                DisplayController.updateGrid('new');
+                DisplayController.updateGrid();
             }
         }
     };
@@ -92,7 +101,7 @@ const DisplayController = (() => {
     const displayMessage = document.querySelector('#game-display');
     const resetButton = document.querySelector('#reset-button');
 
-    // set event listener to reset button
+    // set event listener on the reset button
     resetButton.addEventListener('click', GameController.resetGame);
     
     const showCurrentPlayer = () => {
@@ -103,39 +112,37 @@ const DisplayController = (() => {
         displayMessage.innerHTML = `<p>${GameController.getPlayerName()} wins!</p>`
     }
 
-    const announceTie = () => {
-        displayMessage.innerHTML = '<p>It\'s a tie!</p>'
+    const announceDraw = () => {
+        displayMessage.innerHTML = '<p>It\'s a draw!</p>'
     }
     
-    // clear current board and create new cell for each array item
-    const updateGrid = (gameStatus) => {
+    // clear board on display and create a new cell for each array item
+    const updateGrid = () => {
         let index = 0;
         displayBoard.innerHTML = '';
         GameBoard.board.forEach(boardItem => {
-            createCell(boardItem, index, gameStatus)
+            createCell(boardItem, index)
             index++;
         });
     };
 
     // create a cell (button) on the display
-    const createCell = (boardItem, index, status) => {
+    const createCell = (boardItem, index) => {
         const displayCell = document.createElement('button');  
         displayBoard.append(displayCell);
-        setCell(displayCell, 'cell', boardItem, index, status);
+        setCell(displayCell, 'cell', boardItem, index);
     };
         
      // set properties of the newly created cell
-    const setCell = (displayCell, className, boardItem, index, status)=> {
+    const setCell = (displayCell, className, boardItem, index)=> {
          const newCell = displayCell;
          newCell.className = className;
          newCell.innerText = boardItem;
          newCell.setAttribute('data', index);
-         if(status === 'new'){
-             newCell.addEventListener('click', () => GameController.placeMarker(index));
-         }
+         newCell.addEventListener('click', () => GameController.placeMarker(index));
      };
     
-    return { updateGrid, announceWinner, announceTie, showCurrentPlayer };
+    return { updateGrid, announceWinner, announceDraw, showCurrentPlayer };
 })();
 
 GameController.newGame();
