@@ -6,8 +6,7 @@
     --text-light-color: #eee;
     --container-background-color: #eee;
     --border-color: #333;
-    --title-font: 'Permanent Marker', cursive;
-    --cell-font: 'Permanent Marker', cursive;
+    --marker-font: 'Permanent Marker', cursive;
     --text-font: 'Poppins', sans-serif;
     --cell-color: white;
     --cell-color-hover: #eee; 
@@ -45,7 +44,7 @@ header{
 }
 
 #title{
-    font-family: var(--title-font);
+    font-family: var(--marker-font);
     color: var(--text-light-color);
     font-size: 2em;
 }
@@ -55,7 +54,7 @@ main{
 
     display: grid;   
     grid-template-columns: 1fr 544px 1fr;
-    grid-template-rows: 1fr 70px 544px 1fr;
+    grid-template-rows: 1fr 150px 544px 1fr;
 }
 
 nav{
@@ -74,9 +73,23 @@ nav{
     grid-area: 3 / 2 / 4/ 3;
 }
 
+.cell:nth-child(n){
+    border-top: none;
+    border-left: none;
+
+}
+
+.cell:nth-child(n + 7){
+    border-bottom: none;
+}
+
+.cell:nth-child(3n){
+    border-right: none;
+}
+
 .cell{
     vertical-align: middle;
-    font-family: var(--cell-font);
+    font-family: var(--marker-font);
     font-size: 8em;
     border: solid 1px;
     background-color: var(--cell-color);
@@ -86,7 +99,7 @@ nav{
 }
 
 .cell:hover{
-    font-family: var(--cell-font);
+    font-family: var(--marker-font);
     font-size: 8em;
     background-color: var(--cell-color-hover);
 

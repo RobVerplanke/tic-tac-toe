@@ -65,8 +65,10 @@ const GameController = (() => {
     let currentPlayer = player1;
 
     const newGame = () =>{
+        // input player names / marker choice
         currentPlayer = player1;
         DisplayController.showCurrentPlayer();
+        GameBoard.resetBoard();
         DisplayController.updateGrid();
     };
 
@@ -74,7 +76,6 @@ const GameController = (() => {
         currentPlayer = player1;
         DisplayController.showCurrentPlayer();
         GameBoard.resetBoard();
-        GameBoard.board = ['','','','','','','','',''];
         DisplayController.updateGrid();
     };
 
@@ -106,10 +107,13 @@ const GameController = (() => {
 const DisplayController = (() => {
     const displayBoard = document.querySelector('#grid-container');
     const displayMessage = document.querySelector('#game-display');
-    const resetButton = document.querySelector('#reset-button');
+    const resetButton = document.querySelector('#resetButton');
+    const newGameButton = document.querySelector('#newGameButton');
 
-    // set event listener on the reset button
+    // set event listener on the nav buttons
     resetButton.addEventListener('click', GameController.resetGame);
+    newGameButton.addEventListener('click', GameController.newGame);
+
     
     const showCurrentPlayer = () => {
         displayMessage.innerHTML = `<p>${GameController.getPlayerName()}'s turn`;
