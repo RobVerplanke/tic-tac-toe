@@ -113,6 +113,7 @@ nav{
     border-radius: 10px;
     color: var(--background-color);
     background-color: white;
+    border: solid 2px var(--background-color);
     font-family: 'Poppins', sans-serif;
     font-weight: 900;
     font-size: 1em;

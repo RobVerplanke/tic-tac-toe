@@ -8,6 +8,10 @@ const GameBoard = (() => {
         board = ['','','','','','','','',''];
     }
 
+    const setMarker = (index) => {
+        board[index] = GameController.getPlayerMarker();
+    }
+
     // checks whether selected cell is empty or not
     const checkAvailableCell = (index) => {
         if (board[index] !== '') {
@@ -17,6 +21,7 @@ const GameBoard = (() => {
     };
 
     const checkForWin = () => {
+        console.log(board);
         if ((board[0] === board[1] && board[0] === board[2] && (!(board[0] === ''))) ||
             (board[3] === board[4] && board[3] === board[5] && (!(board[3] === ''))) ||
             (board[6] === board[7] && board[6] === board[8] && (!(board[6] === ''))) ||
@@ -25,13 +30,13 @@ const GameBoard = (() => {
             (board[2] === board[5] && board[2] === board[8] && (!(board[2] === ''))) ||
             (board[0] === board[4] && board[0] === board[8] && (!(board[0] === ''))) ||
             (board[2] === board[4] && board[2] === board[6] && (!(board[2] === '')))) {
-                DisplayController.updateGrid();
+                DisplayController.updateGrid('new');
                 DisplayController.announceWinner();
                 return true;
 
         // check if the game ended in a draw
         } if(!(board.includes(''))) {
-            DisplayController.updateGrid();
+            DisplayController.updateGrid('new');
             DisplayController.announceDraw();
             return true;
         } 
@@ -42,7 +47,7 @@ const GameBoard = (() => {
         return false;
     };    
 
-    return { board, resetBoard, checkAvailableCell, checkForWin };
+    return { board, resetBoard, setMarker, checkAvailableCell, checkForWin };
 })();
 
 
@@ -83,14 +88,14 @@ const GameController = (() => {
     // if selected cell is empty, place a marker
     const placeMarker = (index) => {
         if(GameBoard.checkAvailableCell(index) === true){
-            GameBoard.board[index] = getPlayerMarker();
+            GameBoard.setMarker(index);
             if(GameBoard.checkForWin() === false){
                 DisplayController.updateGrid();
             }
         }
     };
 
-    return { newGame, resetGame, getPlayerName, placeMarker, switchPlayers };
+    return { newGame, resetGame, getPlayerName, getPlayerMarker, placeMarker, switchPlayers };
 })();
 
 
@@ -117,29 +122,31 @@ const DisplayController = (() => {
     }
     
     // clear board on display and create a new cell for each array item
-    const updateGrid = () => {
+    const updateGrid = (gameStatus) => {
         let index = 0;
         displayBoard.innerHTML = '';
         GameBoard.board.forEach(boardItem => {
-            createCell(boardItem, index)
+            createCell(boardItem, index, gameStatus)
             index++;
         });
     };
 
     // create a cell (button) on the display
-    const createCell = (boardItem, index) => {
+    const createCell = (boardItem, index, gameStatus) => {
         const displayCell = document.createElement('button');  
         displayBoard.append(displayCell);
-        setCell(displayCell, 'cell', boardItem, index);
+        setCell(displayCell, 'cell', boardItem, index, gameStatus);
     };
         
      // set properties of the newly created cell
-    const setCell = (displayCell, className, boardItem, index)=> {
+    const setCell = (displayCell, className, boardItem, index, gameStatus)=> {
          const newCell = displayCell;
          newCell.className = className;
          newCell.innerText = boardItem;
          newCell.setAttribute('data', index);
-         newCell.addEventListener('click', () => GameController.placeMarker(index));
+         if(gameStatus !== 'new'){
+            newCell.addEventListener('click', () => GameController.placeMarker(index));
+         }
      };
     
     return { updateGrid, announceWinner, announceDraw, showCurrentPlayer };
