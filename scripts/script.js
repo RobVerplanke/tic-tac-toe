@@ -64,13 +64,48 @@ const playerOne = Player();
 const playerTwo = Player();
 
 
+// ***** Form controller *****
+
+const FormController = (() => {
+
+  const handleForm = () => {
+    const playerOneName = document.querySelector('#PlayerOne');
+    const playerTwoName = document.querySelector('#PlayerTwo');
+    const playerOneMarker = document.querySelector('#getMarker');
+
+    playerOne.name = playerOneName.value;
+    playerOne.marker = playerOneMarker.value;
+    playerTwo.name = playerTwoName.value;
+    
+    if(playerOne.marker === 'X'){
+      playerTwo.marker = 'O';
+    } else {
+      playerTwo.marker = 'X';
+    }
+    hideForm();
+    GameController.newGame();
+  };
+
+  const hideForm = () => {
+    const startForm = document.querySelector('#startingForm');
+    startForm.style.display = 'none';
+  };
+
+  const showForm = () => {
+    const startForm = document.querySelector('#startingForm');
+    startForm.style.display = 'grid';
+  };
+
+  return { handleForm, hideForm, showForm }
+})();
+
+
 // ***** Game controller *****
 
 const GameController = (() => {
   let currentPlayer = playerOne;
 
   const newGame = () =>{
-    // input player names / marker choice
     currentPlayer = playerOne;
     DisplayController.showCurrentPlayer();
     GameBoard.resetBoard();
@@ -103,27 +138,7 @@ const GameController = (() => {
     }
   };
 
-  const handleForm = () => {
-    const startForm = document.querySelector('#startingForm');
-    const playerOneName = document.querySelector('#PlayerOne');
-    const playerTwoName = document.querySelector('#PlayerTwo');
-    const playerOneMarker = document.querySelector('#getMarker');
-
-    playerOne.name = playerOneName.value;
-    playerOne.marker = playerOneMarker.value;
-    playerTwo.name = playerTwoName.value;
-
-    if(playerOne.marker === 'X'){
-      playerTwo.marker = 'O';
-    } else {
-      playerTwo.marker = 'X';
-    }
-    
-    startForm.style.display = 'none';
-    GameController.newGame();
-  };
-
-  return { newGame, resetGame, getPlayerName, getPlayerMarker, placeMarker, switchPlayers, handleForm };
+  return { newGame, resetGame, getPlayerName, getPlayerMarker, placeMarker, switchPlayers};
 })();
 
 
@@ -138,8 +153,8 @@ const DisplayController = (() => {
 
   // set event listener on the buttons
   resetButton.addEventListener('click', GameController.resetGame);
-  newGameButton.addEventListener('click', GameController.newGame);
-  startGameButton.addEventListener('click', GameController.handleForm);
+  newGameButton.addEventListener('click', FormController.showForm);
+  startGameButton.addEventListener('click', FormController.handleForm);
 
   const showCurrentPlayer = () => {
     displayMessage.innerHTML = `<p>${GameController.getPlayerName()}'s turn`;
@@ -161,7 +176,7 @@ const DisplayController = (() => {
     currentBoard.forEach(boardItem => {
       createCell(boardItem, index, gameStatus)
       index++;
-    });
+    })
   };
 
   // create a cell (button) on the display
