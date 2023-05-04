@@ -60,8 +60,8 @@ const Player = (name, marker) => ({ name, marker });
 // const player1 = Player('Player 1', 'X');
 // const player2 = Player('Player 2', 'O');
 
-const playerOne = Player();
-const playerTwo = Player();
+const playerOne = Object.create(Player);
+const playerTwo = Object.create(Player);
 
 
 // ***** Game controller *****
@@ -109,17 +109,21 @@ const GameController = (() => {
     const playerTwoName = document.querySelector('#PlayerTwo');
     const playerOneMarker = document.querySelector('#getMarker');
 
+
+
     playerOne.name = playerOneName.value;
     playerOne.marker = playerOneMarker.value;
-    playerTwo.name = playerTwoName.value;
 
-    if(playerOne.marker === 'X'){
+    playerTwo.name = playerTwoName.value;
+    
+    if(playerOneMarker === 'X'){
       playerTwo.marker = 'O';
     } else {
       playerTwo.marker = 'X';
     }
     
     startForm.style.display = 'none';
+  
     GameController.newGame();
   };
 
