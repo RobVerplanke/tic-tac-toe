@@ -70,11 +70,12 @@ const FormController = (() => {
 
   const startForm = document.querySelector('#startingForm');
 
-  const handleForm = () => {
+  const handleForm = (e) => {
     
-    // fix default submit button behaviour
-    event.preventDefault();
-    
+    // fix default submit button behavior
+    // eslint-disable-next-line no-restricted-globals
+    e.preventDefault();
+
     const playerOneName = document.querySelector('#PlayerOne');
     const playerTwoName = document.querySelector('#PlayerTwo');
     const playerOneMarker = document.querySelector('#getMarker');
@@ -159,7 +160,9 @@ const DisplayController = (() => {
   // set event listener on the buttons
   resetButton.addEventListener('click', GameController.resetGame);
   newGameButton.addEventListener('click', FormController.showForm);
-  startGameButton.addEventListener('click', FormController.handleForm);
+  startGameButton.addEventListener('click', (e) => {
+    FormController.handleForm(e);
+  });
 
   const showCurrentPlayer = () => {
     displayMessage.innerHTML = `<p>${GameController.getPlayerName()}'s turn`;
