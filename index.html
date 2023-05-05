@@ -12,18 +12,18 @@
 <body>
     <form name="sign-in" method="POST">
         <div class="starting-form" id="startingForm">
-            <div class="left-side">
+            <div class="top-side">
                 <label for="PlayerOne"><p>Player 1 name:</p></label>
-                <input type="text" id="PlayerOne" placeholder="Player 1"><br>
+                <input type="text" class="player-names" id="PlayerOne" placeholder="Player 1"/><br><br>
                 <label for="getMarker"><p>Choose marker</p></label>
                 <select id="getMarker">
                     <option value="X">X</option>
                     <option value="O">O</option>
                 </select>
             </div>
-            <div class="right-side">
+            <div class="bottom-side">
                 <label for="PlayerTwo"><p>Player 2 name:</p></label>
-                <input type="text" id="PlayerTwo" placeholder="Player 2">
+                <input type="text" class="player-names" id="PlayerTwo" placeholder="Player 2"/>
                 <label for="submit"></label><br><br><br>
                 <button type="submit" id="startButton">Start game</button>
             </div>    

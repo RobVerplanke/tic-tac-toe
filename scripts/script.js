@@ -66,9 +66,12 @@ const playerTwo = Player();
 
 // ***** Form controller *****
 
-const FormController = (() => {
+const FormController = () => {
+
+  const startForm = document.querySelector('#startingForm');
 
   const handleForm = () => {
+    console.log('handleForm');
     const playerOneName = document.querySelector('#PlayerOne');
     const playerTwoName = document.querySelector('#PlayerTwo');
     const playerOneMarker = document.querySelector('#getMarker');
@@ -82,22 +85,21 @@ const FormController = (() => {
     } else {
       playerTwo.marker = 'X';
     }
+    
     hideForm();
     GameController.newGame();
   };
 
   const hideForm = () => {
-    const startForm = document.querySelector('#startingForm');
     startForm.style.display = 'none';
   };
 
   const showForm = () => {
-    const startForm = document.querySelector('#startingForm');
     startForm.style.display = 'grid';
   };
 
   return { handleForm, hideForm, showForm }
-})();
+};
 
 
 // ***** Game controller *****
