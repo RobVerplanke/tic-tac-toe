@@ -66,12 +66,15 @@ const playerTwo = Player();
 
 // ***** Form controller *****
 
-const FormController = () => {
+const FormController = (() => {
 
   const startForm = document.querySelector('#startingForm');
 
   const handleForm = () => {
-    console.log('handleForm');
+    
+    // fix default submit button behaviour
+    event.preventDefault();
+    
     const playerOneName = document.querySelector('#PlayerOne');
     const playerTwoName = document.querySelector('#PlayerTwo');
     const playerOneMarker = document.querySelector('#getMarker');
@@ -99,7 +102,7 @@ const FormController = () => {
   };
 
   return { handleForm, hideForm, showForm }
-};
+})();
 
 
 // ***** Game controller *****
